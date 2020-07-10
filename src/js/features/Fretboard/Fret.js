@@ -2,7 +2,7 @@ import React from "react";
 
 import GuitarString from './GuitarString';
 
-const Fret = ({ width, height, num, numStrings, dotSize = 10 }) => {
+const Fret = ({ width, height, num, tuning, dotSize = 10, notes = {}, openStrings = {} }) => {
   const showDot = [3, 5, 7, 9, 15, 17, 19, 21].includes(num);
   const showTwoDots = [12, 24].includes(num);
   return (
@@ -17,9 +17,20 @@ const Fret = ({ width, height, num, numStrings, dotSize = 10 }) => {
         </>
       )}
       {
-        Array(numStrings).fill(null).map((num, index) => (
-          <GuitarString key={index} height={height} stringWidth={index + 1} fretNum={index + 1} />
-        ))
+        tuning.map((openNote, index) => {
+          const stringNum = index + 1;
+          return (
+            <GuitarString
+              key={index}
+              height={height}
+              stringWidth={index + 1}
+              fretNum={num}
+              openNote={openNote}
+              isOpen={!!openStrings[stringNum]}
+              showNote={!!notes[stringNum]}
+            />
+          );
+        })
       }
     </div>
   );
