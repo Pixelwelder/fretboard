@@ -11,6 +11,7 @@ const Fretboard = ({
   numFrets = 15,
   notes = []
 }) => {
+  const fretboardWidth = width - 50;
   const guitar = createGuitar(scaleLength);
   const percentages = guitar.getWidthsPercent(numFrets);
 
@@ -29,28 +30,39 @@ const Fretboard = ({
   console.log(openStrings);
 
   return (
-    <div style={{ ...fretboardStyle.container, width, height }}>
-      {percentages.map((percentage, index) => {
-        const fretNum = index + 1;
-        const notes = notesByFret[fretNum] || {};
-        return (
-          <Fret
-            key={index}
-            width={percentage * width}
-            height={height / tuning.length}
-            num={fretNum}
-            tuning={tuning}
-            notes={notes}
-            openStrings={openStrings}
-          />
-        );
-      })}
+    <div style={{ ...localStyle.container, width, height }}>
+      <div style={localStyle.leftContainer}>
+      </div>
+      <div style={{ ...localStyle.fretboard, width: fretboardWidth, height }}>
+        {percentages.map((percentage, index) => {
+          const fretNum = index + 1;
+          const notes = notesByFret[fretNum] || {};
+          return (
+            <Fret
+              key={index}
+              width={percentage * fretboardWidth}
+              height={height / tuning.length}
+              num={fretNum}
+              tuning={tuning}
+              notes={notes}
+              openStrings={openStrings}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
 
-const fretboardStyle = {
+const localStyle = {
   container: {
+    background: '#eeeeee',
+    display: 'flex'
+  },
+  leftContainer: {
+    width: 50
+  },
+  fretboard: {
     display: 'flex',
     border: '1px solid lightgray',
     marginBottom: 20

@@ -1,6 +1,7 @@
 import React from "react";
 
 import { getInterval } from '../../util/scale';
+import Note from "./Note";
 
 const GuitarString = ({ height, stringWidth, fretNum, showNote = false, noteSize = 18, openNote, isOpen }) => {
   if (showNote) {
@@ -13,13 +14,7 @@ const GuitarString = ({ height, stringWidth, fretNum, showNote = false, noteSize
   return (
     <div style={{ ...localStyle.container, height }} >
       <div style={stringStyle} />
-      {showNote && <div style={{
-        ...localStyle.note,
-        width: noteSize,
-        height: noteSize,
-        marginTop: -noteSize / 2,
-        marginLeft: -noteSize / 2
-      }}>{note}</div>}
+      {showNote && <Note note={note} size={noteSize} />}
     </div>
   );
 }
@@ -37,19 +32,6 @@ const localStyle = {
   },
   stringOpen: {
     backgroundColor: '#ffcc00'
-  },
-  note: {
-    backgroundColor: '#ffcc00',
-    position: 'absolute',
-    left: '50%',
-    top: '50%',
-    borderRadius: '100%',
-    border: '1px solid white',
-    fontFamily: 'helvetica',
-    fontSize: 8,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
   }
 };
 
