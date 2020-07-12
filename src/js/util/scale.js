@@ -1,4 +1,4 @@
-const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'G', 'G#', 'A', 'A#', 'B'];
+const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
 // Instead of doing math, let's just generate an array of supported notes.
 const generateNotes = () => {
